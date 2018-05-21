@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        html{height:100%}
+        body{height:100%;margin:0px;padding:0px}
+        #baidu_map{height: 100%}
+    </style>
+
+    <link rel="stylesheet" href="lib/horizontal-timeline-master/css/reset.css">
+    <link rel="stylesheet" href="lib/horizontal-timeline-master/css/style.css">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=s5op0rBri8h6EBYCYoEREAZ3OQRrMKME"></script>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="lib/jquery3.3.1/jquery3.3.1.js"></script>
+    <script src="lib/echarts.js"></script>
+    <script src="lib/bmap.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+</head>
+<body>
+
+<div class="page-header" style="margin:0 20px;padding-bottom: 0">
+    <h4>数据地图 <small>beiyou.charts</small></h4>
+</div>
+<div class="container" style="pointer-events:none;width: 100%;z-index:2;position:absolute;background: transparent;padding-top: 20px">
+    <div id="index_one" class="dropdown col-md-3" style="pointer-events: auto">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            一级指标
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li class="dropdown-header"><a href="#">请选择一级指标</a></li>
+            <li><a href="#">指标1</a></li>
+            <li><a href="#">指标2</a></li>
+            <li><a href="#">指标3</a></li>
+        </ul>
+    </div>
+    <div id="index_two" class="dropdown col-md-3" style="pointer-events: auto">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            二级指标
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li class="dropdown-header"><a href="#">请选择二级指标</a></li>
+            <li><a href="#">指标1</a></li>
+            <li><a href="#">指标2</a></li>
+            <li><a href="#">指标3</a></li>
+        </ul>
+    </div>
+    <div id="button_right" class="btn-group " role="group" aria-label="..." style="pointer-events: auto">
+        <button type="button" class="btn btn-default" onclick="show_table()">按钮1</button>
+        <button type="button" class="btn btn-default">按钮2</button>
+        <button type="button" class="btn btn-default">按钮3</button>
+    </div>
+    <div class="table_container" id="main_echarts" style="pointer-events:auto;display:none;float:right;height: 300px;width: 300px;"></div>
+
+
+
+</div>
+<div class="timeline_container" style="width: 100%;position:absolute;background: transparent;padding-top:45%;padding-left: 25%">
+    <section class="cd-horizontal-timeline" style="">
+        <div class="timeline">
+            <div class="events-wrapper">
+                <div class="events">
+                    <ol>
+                        <li><a href="#0" data-date="16/01/2014" class="selected" onclick="test1()">16 Jan</a></li>
+                        <li><a href="#0" data-date="28/02/2014" onclick="test2()">28 Feb</a></li>
+                        <!-- other dates here -->
+                    </ol>
+                    <span class="filling-line" aria-hidden="true"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div id="baidu_map"></div>
+<script>
+    myChart=echarts.init(document.getElementById('baidu_map'));
+    var option={
+        bmap:{
+            center:[110.404, 35.915],
+            zoom:5,
+            maxZoom:12,
+            roam:true,
+            mapStyle:{
+                styleJson: [ {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": {
+                        "color": "#021019"
+                    }
+                },
+                    {
+                        "featureType": "highway",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": {
+                            "color": "#147a92"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.stroke",
+                        "stylers": {
+                            "color": "#0b3d51"
+                        }
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#08304b"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "geometry.stroke",
+                        "stylers": {
+                            "color": "#08304b"
+                        }
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "lightness": -70
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.fill",
+                        "stylers": {
+                            "color": "#857f7f"
+                        }
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.stroke",
+                        "stylers": {
+                            "color": "#000000"
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#022338"
+                        }
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#062032"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#1e1c1c"
+                        }
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#022338"
+                        }
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.icon",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.fill",
+                        "stylers": {
+                            "color": "#2da0c6",
+                            "visibility": "on"
+                        }
+                    },
+                    {
+                        "featureType": "city",
+                        "elementType": "labels",
+                        "stylers": {
+                            "color": "#ffffff00"
+                        }
+                    }]
+            }
+        }
+    }
+    myChart.setOption(option);
+    var bm=myChart.getModel().getComponent('bmap').getBMap();
+
+
+
+</script>
+<script type="text/javascript" src="static/js/main.js"></script>
+<script type="text/javascript" src="static/js/map.js"></script>
+<script src="lib/horizontal-timeline-master/js/main.js"></script>
+<script src="lib/echarts.min.js"></script>
+
+</body>
+</html>
