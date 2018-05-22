@@ -60,7 +60,7 @@ function upper(e) {
     }
 
 }
-//添加覆盖物
+//添加覆盖物（随机颜色）
 function addPly_(name,province,city){
     $.ajax({
         url:"data/json/china.json",
@@ -100,6 +100,7 @@ function addPly_(name,province,city){
 
     })
 }
+//指定颜色添加覆盖物
 
 function addPly(name,color) {
     var bdy=new BMap.Boundary();
@@ -127,7 +128,7 @@ function addPly(name,color) {
 
 function show_table(){
     $.table=$(".table_container");
-    $.table.css("display","");
+    $.table.css("display","inline-block");
     var myChart=echarts.init(document.getElementById('main_echarts'));
     var option={
         xAxis: {
